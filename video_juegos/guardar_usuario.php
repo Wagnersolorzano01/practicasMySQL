@@ -13,8 +13,10 @@ $cedula = '';
 $nombre = '';
 $correo = '';
 $error = '';
+$stmt = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verifico la conexión 
     include("conexion.php");
     // Obtengo los datos ingresados por el usuario
     $cedula = trim($_POST['cedula']);
@@ -34,23 +36,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Valido el tamaño o longitud de la cédula
     elseif (strlen($cedula) < 8 || strlen($cedula) > 10) {
-        $error = "¡ La cédula debe tener entre 8 y 10 dígitos :/ :/ !";
+        $error = "¡ La cédula debe tener entre 8 y 10 dígitos !";
     }
     // Valido que el nombre solo contenga letras 
     elseif (!preg_match("/^[a-zA-ZáéíóúñÑÁÉÍÓÚ\s]+$/", $nombre)) {
-        $error = "El nombre no debe contener números :/ ";
+        $error = "El nombre no debe contener números  ";
     }
     // Valido el tamaño o longitud del nombre
     elseif (strlen($nombre) < 3) {
-        $error = ":/ ¡ El nombre debe tener al menos 3 caracteres !";
+        $error = "¡ El nombre debe tener al menos 3 caracteres !";
     }
     // Verifico que el correo tenga un formato válido
     elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $error = ":7 ¡ El correo electrónico no es válido !";
+        $error = "¡ El correo electrónico no es válido !";
     }
     // Valido la longitud de la  contraseña
     elseif (strlen($password) < 6) {
-        $error = "*_* ¡ La contraseña debe tener al menos 6 caracteres !";
+        $error = "*¡ La contraseña debe tener al menos 6 caracteres !";
     }
     else {
         // Verifico que el correo no esté duplicado
@@ -61,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
-            $error = ":/ ¡ Este correo ya está registrado !";
+            $error = "¡ Este correo ya está registrado !";
         } else {
             // Verifico que la cédula no esté duplicada
             $sql = "SELECT id FROM jugadores WHERE cedula = ?";
@@ -91,8 +93,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    $stmt->close(); // Con esto cierro la consulta que realizo con el query
-    $conexion->close(); // En cambio con esto cierro la conexión completa con MSQL 
+    // Cerrar statement si existe
+    if ($stmt instanceof mysqli_stmt) {
+        $stmt->close();
+    }
+
+    // Cerrar conexión
+    $conexion->close();
 }
 ?>
 
