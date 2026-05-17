@@ -4,11 +4,12 @@ session_start();
 include("conexion.php");
 
 $error = '';
-// Obtengo el correo y contraseña del formulario
+// Verifico si el formulario fue enviado 
+// y obtengo el correo y contraseña del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = trim($_POST['correo']);
     $password = $_POST['password'];
-    
+    // Verifico que los campos no estén vacíos 
     if (empty($correo) || empty($password)) {
         $error = "Todos los campos son obligatorios";
     } else {
@@ -18,10 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("s", $correo);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+        // Verifico si el usuario existe
         if ($result->num_rows === 1) {
             $usuario = $result->fetch_assoc();
-            // Verifico que la contraseña sea correcta
+            // Comparo la contraseña ingresada con la guardada
             if (password_verify($password, $usuario['password'])) {
                 $_SESSION['id'] = $usuario['id'];
                 $_SESSION['nombre'] = $usuario['nombre'];

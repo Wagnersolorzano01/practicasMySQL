@@ -14,10 +14,9 @@ $nombre = '';
 $correo = '';
 $error = '';
 
-// Obtengo los datos ingresados por el usuario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("conexion.php");
-    
+    // Obtengo los datos ingresados por el usuario
     $cedula = trim($_POST['cedula']);
     $nombre = trim($_POST['nombre']);
     $correo = trim($_POST['correo']);
@@ -45,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif (strlen($nombre) < 3) {
         $error = ":/ ¡ El nombre debe tener al menos 3 caracteres !";
     }
-    // Verifico que el correo tengo un fomrato válido
+    // Verifico que el correo tenga un formato válido
     elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
         $error = ":7 ¡ El correo electrónico no es válido !";
     }
@@ -74,10 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result->num_rows > 0) {
                 $error = "¡ Esta cédula ya está registrada !";
             } else {
-                // Encripto la contaseña para mayor seguridad
+                // Encripto la contraseña para mayor seguridad
                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
                 
-                // Inserto el nuevoi usuario en la base de datos 
+                // Inserto el nuevo usuario en la base de datos 
                 $sql = "INSERT INTO jugadores (cedula, nombre, correo, password) VALUES (?, ?, ?, ?)";
                 $stmt = $conexion->prepare($sql);
                 $stmt->bind_param("ssss", $cedula, $nombre, $correo, $passwordHash);
@@ -92,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    $stmt->close(); // Con esto cierro la consulta que realizo con el query 
+    $stmt->close(); // Con esto cierro la consulta que realizo con el query
     $conexion->close(); // En cambio con esto cierro la conexión completa con MSQL 
 }
 ?>
