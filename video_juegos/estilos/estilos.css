@@ -1,0 +1,147 @@
+/* Botón primario (azul) - para acciones principales */
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.02);
+}
+
+/* Botón éxito (verde) - para iniciar sesión */
+.btn-success {
+    background-color: #198754;
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+    transform: scale(1.02);
+}
+
+/* Botón advertencia (amarillo) - para registrarse, cambiar contraseña */
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: #000000;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transform: scale(1.02);
+}
+
+/* Botón peligro (rojo) - para cerrar sesión */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    transform: scale(1.02);
+}
+
+/* Botón secundario (gris) - para cancelar */
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5c636a;
+    transform: scale(1.02);
+}
+
+/* ===== FONDO DE PÁGINAS ESPECÍFICAS ===== */
+
+/* Para páginas que no sean el index (perfil, cambiar password) */
+body:not(.index-page) {
+    background-color: #f4f4f4;
+}
+
+/* Asegurar que las cards tengan fondo blanco */
+.card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.navbar {
+    background-color: #212529; /* oscuro */
+}
+.card:hover{
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.btn{
+    transition: 0.3s;
+}
+
+.perfil-icono{
+    font-size: 80px;
+    color: #ffc107;
+}
+
+.info-card{
+    border-left: 5px solid #ffc107;
+}
+/* ===== PERFIL ===== */
+
+.perfil-card{
+    max-width: 900px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.perfil-icono{
+    font-size: 100px;
+    color: #ffc107;
+}
+
+/* Tarjetas información */
+.info-card{
+    border-left: 5px solid #ffc107;
+    transition: 0.3s;
+}
+
+.info-card:hover{
+    transform: translateY(-5px);
+}
+
+/* Efecto botones */
+.btn{
+    transition: 0.3s;
+}
+
+.btn:hover{
+    transform: scale(1.02);
+}
+
+/* Fondo general */
+body{
+    background: linear-gradient(to right, #1f1f1f, #2d2d2d);
+}
+
+/* Cards */
+.card{
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Inputs */
+.form-control{
+    border-radius: 10px;
+}
+
+/* Navbar */
+.navbar{
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+}
